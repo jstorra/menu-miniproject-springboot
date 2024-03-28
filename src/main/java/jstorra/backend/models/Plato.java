@@ -1,6 +1,7 @@
 package jstorra.backend.models;
 
 import jakarta.persistence.*;
+import jstorra.backend.models.dtos.PlatoDTO;
 
 import java.util.List;
 
@@ -72,5 +73,15 @@ public class Plato {
 
     public void setFacturas(List<Factura> facturas) {
         this.facturas = facturas;
+    }
+
+    public PlatoDTO toDTO() {
+        PlatoDTO dto = new PlatoDTO();
+        dto.setId(this.getId());
+        dto.setNombre(this.getNombre());
+        dto.setDescripcion(this.getDescripcion());
+        dto.setPrecio(this.getPrecio());
+        dto.setImagen(this.getImagen());
+        return dto;
     }
 }

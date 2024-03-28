@@ -2,6 +2,7 @@ package jstorra.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jstorra.backend.models.dtos.FacturaDTO;
 
 import java.time.LocalDate;
 
@@ -77,5 +78,16 @@ public class Factura {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public FacturaDTO toDTO() {
+        FacturaDTO dto = new FacturaDTO();
+        dto.setId(this.getId());
+        dto.setFechaCompra(this.getFechaCompra());
+        dto.setTotal(this.getTotal());
+        dto.setTipoPago(this.getTipoPago());
+        dto.setPlato(this.getPlato().toDTO());
+        dto.setCliente(this.getCliente().toDTO());
+        return dto;
     }
 }

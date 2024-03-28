@@ -53,7 +53,7 @@ public class PlatoService {
             platoToUpdate.setPrecio(plato.getPrecio());
             platoToUpdate.setImagen(plato.getImagen());
 
-            platoRepository.save(platoToUpdate);
+            savePlato(platoToUpdate);
 
             return new LinkedHashMap<>() {{
                 put("message", "El plato ha sido actualizado.");
@@ -67,7 +67,7 @@ public class PlatoService {
         try {
             int parsedId = Integer.parseInt(id.toString());
 
-            Plato platoToUpdate = platoRepository.findById(parsedId).orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + parsedId + " no existe."));
+            Plato plato = platoRepository.findById(parsedId).orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + parsedId + " no existe."));
 
             platoRepository.deleteById(parsedId);
 

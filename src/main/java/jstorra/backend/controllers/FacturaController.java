@@ -1,6 +1,6 @@
 package jstorra.backend.controllers;
 
-import jstorra.backend.models.Factura;
+import jstorra.backend.models.dtos.FacturaDTO;
 import jstorra.backend.services.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +18,7 @@ public class FacturaController {
     FacturaService facturaService;
 
     @GetMapping
-    public List<Factura> getAllFacturas() {
+    public List<FacturaDTO> getAllFacturas() {
         return facturaService.getAllFacturas();
     }
 }

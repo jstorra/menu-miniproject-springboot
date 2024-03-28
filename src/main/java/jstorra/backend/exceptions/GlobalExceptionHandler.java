@@ -15,10 +15,24 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ClienteDuplicateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleClienteDuplicateException(ClienteDuplicateException ex) {
+        ErrorResponses errorResponse = new ErrorResponses("Cliente duplicado", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(PlatoNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handlePlatoNotFoundException(PlatoNotFoundException ex) {
         ErrorResponses errorResponse = new ErrorResponses("Plato no encontrado", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ClienteNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleClienteNotFoundException(ClienteNotFoundException ex) {
+        ErrorResponses errorResponse = new ErrorResponses("Cliente no encontrado", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 

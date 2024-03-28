@@ -1,6 +1,7 @@
 package jstorra.backend.models;
 
 import jakarta.persistence.*;
+import jstorra.backend.models.dtos.ClienteDTO;
 
 import java.util.List;
 
@@ -72,5 +73,15 @@ public class Cliente {
 
     public void setFacturas(List<Factura> facturas) {
         this.facturas = facturas;
+    }
+
+    public ClienteDTO toDTO() {
+        ClienteDTO dto = new ClienteDTO();
+        dto.setId(this.getId());
+        dto.setDni(this.getDni());
+        dto.setNombre(this.getNombre());
+        dto.setTelefono(this.getTelefono());
+        dto.setCorreo(this.getCorreo());
+        return dto;
     }
 }
