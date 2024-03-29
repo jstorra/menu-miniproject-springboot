@@ -43,21 +43,7 @@ public class FacturaService {
     public Map<Object, Object> saveFactura(FacturaPostDTO facturaPostDTO) {
         Factura factura = new Factura();
 
-        factura.setFechaCompra(facturaPostDTO.getFechaCompra());
-        factura.setTotal(facturaPostDTO.getTotal());
-        factura.setTipoPago(facturaPostDTO.getTipoPago());
-
-        Plato plato = platoRepository.findById(facturaPostDTO.getPlatoId()).
-                orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + facturaPostDTO.getPlatoId() + " no existe."));
-
-        factura.setPlato(plato);
-
-        Cliente cliente = clienteRepository.findById(facturaPostDTO.getClienteId()).
-                orElseThrow(() -> new ClienteNotFoundException("Cliente con ID " + facturaPostDTO.getClienteId() + " no existe."));
-
-        factura.setCliente(cliente);
-
-        facturaRepository.save(factura);
+        facturaRepository.save(fromDTO(factura, facturaPostDTO));
 
         return new LinkedHashMap<>() {{
             put("message", "La factura ha sido registrada.");
@@ -70,21 +56,7 @@ public class FacturaService {
 
             Factura facturaToUpdate = facturaRepository.findById(parsedId).orElseThrow(() -> new FacturaNotFoundException("Factura con ID " + parsedId + " no existe."));
 
-            facturaToUpdate.setFechaCompra(facturaPostDTO.getFechaCompra());
-            facturaToUpdate.setTotal(facturaPostDTO.getTotal());
-            facturaToUpdate.setTipoPago(facturaPostDTO.getTipoPago());
-
-            Plato plato = platoRepository.findById(facturaPostDTO.getPlatoId()).
-                    orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + facturaPostDTO.getPlatoId() + " no existe."));
-
-            facturaToUpdate.setPlato(plato);
-
-            Cliente cliente = clienteRepository.findById(facturaPostDTO.getClienteId()).
-                    orElseThrow(() -> new ClienteNotFoundException("Cliente con ID " + facturaPostDTO.getClienteId() + " no existe."));
-
-            facturaToUpdate.setCliente(cliente);
-
-            facturaRepository.save(facturaToUpdate);
+            facturaRepository.save(fromDTO(facturaToUpdate, facturaPostDTO));
 
             return new LinkedHashMap<>() {{
                 put("message", "La factura ha sido actualizada.");
@@ -108,5 +80,23 @@ public class FacturaService {
         } catch (NumberFormatException e) {
             throw new InvalidNumberFormatException("El parametro ingresado no tiene un formato válido.");
         }
+    }
+
+    public Factura fromDTO(Factura factura, FacturaPostDTO facturaPostDTO) {
+        factura.setFechaCompra(facturaPostDTO.getFechaCompra());
+        factura.setTotal(facturaPostDTO.getTotal());
+        factura.setTipoPago(facturaPostDTO.getTipoPago());
+
+        Plato plato = platoRepository.findById(facturaPostDTO.getPlatoId()).
+                orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + facturaPostDTO.getPlatoId() + " no existe."));
+
+        factura.setPlato(plato);
+
+        Cliente cliente = clienteRepository.findById(facturaPostDTO.getClienteId()).
+                orElseThrow(() -> new ClienteNotFoundException("Cliente con ID " + facturaPostDTO.getClienteId() + " no existe."));
+
+        factura.setCliente(cliente);
+
+        return factura;
     }
 }

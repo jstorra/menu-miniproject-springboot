@@ -3,6 +3,7 @@ package jstorra.backend.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jstorra.backend.models.dtos.FacturaGetDTO;
+import jstorra.backend.models.dtos.FacturaPostDTO;
 
 import java.time.LocalDate;
 

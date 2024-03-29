@@ -1,8 +1,10 @@
 package jstorra.backend.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jstorra.backend.models.Cliente;
 import jstorra.backend.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/clientes")
 @CrossOrigin("*")
+@PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class ClienteController {
     @Autowired
     ClienteService clienteService;

@@ -1,9 +1,11 @@
 package jstorra.backend.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jstorra.backend.models.dtos.FacturaGetDTO;
 import jstorra.backend.models.dtos.FacturaPostDTO;
 import jstorra.backend.services.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/facturas")
 @CrossOrigin("*")
+@PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class FacturaController {
     @Autowired
     FacturaService facturaService;

@@ -49,4 +49,18 @@ public class GlobalExceptionHandler {
         ErrorResponses errorResponse = new ErrorResponses("Formato de parametro invalido", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserDuplicateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleUserDuplicateException(UserDuplicateException ex) {
+        ErrorResponses errorResponse = new ErrorResponses("Nombre de usuario duplicado", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidUserException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleInvalidUserException(InvalidUserException ex) {
+        ErrorResponses errorResponse = new ErrorResponses("Credenciales incorrectas", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 }
