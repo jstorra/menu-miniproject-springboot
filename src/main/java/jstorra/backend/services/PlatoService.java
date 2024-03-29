@@ -24,8 +24,7 @@ public class PlatoService {
     public Plato getPlatoById(Object id) {
         try {
             int parsedId = Integer.parseInt(id.toString());
-            return platoRepository.findById(parsedId).
-                    orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + parsedId + " no existe."));
+            return platoRepository.findById(parsedId).orElseThrow(() -> new PlatoNotFoundException("Plato con ID " + parsedId + " no existe."));
         } catch (NumberFormatException e) {
             throw new InvalidNumberFormatException("El parametro ingresado no tiene un formato válido.");
         }

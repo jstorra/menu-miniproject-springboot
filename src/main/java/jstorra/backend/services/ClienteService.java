@@ -22,8 +22,7 @@ public class ClienteService {
     public Cliente getClienteById(Object id) {
         try {
             int parsedId = Integer.parseInt(id.toString());
-            return clienteRepository.findById(parsedId).
-                    orElseThrow(() -> new ClienteNotFoundException("Cliente con ID " + parsedId + " no existe."));
+            return clienteRepository.findById(parsedId).orElseThrow(() -> new ClienteNotFoundException("Cliente con ID " + parsedId + " no existe."));
         } catch (NumberFormatException e) {
             throw new InvalidNumberFormatException("El parametro ingresado no tiene un formato válido.");
         }

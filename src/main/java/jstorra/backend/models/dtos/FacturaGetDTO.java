@@ -2,7 +2,7 @@ package jstorra.backend.models.dtos;
 
 import java.time.LocalDate;
 
-public class FacturaDTO {
+public class FacturaGetDTO {
     private Integer id;
     private LocalDate fechaCompra;
     private double total;
